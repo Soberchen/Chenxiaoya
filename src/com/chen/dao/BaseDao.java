@@ -10,6 +10,7 @@ import java.util.ResourceBundle;
 
 public class BaseDao {
 	Connection conn=null;
+	
 	PreparedStatement pre=null;
 	ResultSet rs=null;
 	int num=0;
