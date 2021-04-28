@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.chen.dao.BookDao">
+
+	<select id="SelectBook" parameterType="map" resultType="Book">
+		SELECT
+		`bookId`,`bookName`,`bookAuthor`,`bookPublish`,`bookPage`,`bookPrice`FROM
+		`books`
+		<where>
+			<if test="bookname !=null and bookname.length()>0">AND bookName LIKE CONCAT('%',#{bookname},'%')</if>
+			<if test="bookpublish !=null and bookpublish.length()>0">AND bookPublish =#{bookpublish}</if>
+		</where>
+		ORDER BY `createDate`
+		LIMIT #{startIndex},#{maxlength}
+
+	</select>
+
+	<select id="SelecCount" parameterType="map" resultType="int">
+		SELECT COUNT(1) FROM `books`
+		<if test="bookname !=null and bookname.length()>0">WHERE bookName LIKE CONCAT('%',#{bookname},'%')</if>
+		<if test="bookpublish !=null and bookpublish.length()>0">AND bookPublish =#{bookpublish}</if>
+	</select>
+	<insert id="InsertBook" parameterType="int">
+		INSERT INTO
+		`books`(`bookName`,`bookAuthor`,`bookPublish`,`bookPage`,`bookPrice`,`createDate`)VALUES
+		(#{bookName},#{bookAuthor},#{bookPublish},#{bookPage},#{bookPrice},#{createDate})
+	</insert>
+</mapper>
