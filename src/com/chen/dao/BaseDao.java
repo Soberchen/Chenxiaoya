@@ -12,7 +12,6 @@ public class BaseDao {
 	Connection conn=null;
 	PreparedStatement pre=null;
 	ResultSet rs=null;
-	
 	int num=0;
 	private static String driver;//数据库驱动字符串
 	private static String url;//连接URL字符串
